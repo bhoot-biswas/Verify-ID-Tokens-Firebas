@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Verify ID Tokens | Firebase
  * Plugin URI:        http://wordpress.org/plugins/verify-id-tokens/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       A plugin to work with Firebase tokens.
  * Version:           1.0.0
  * Author:            Mithun Biswas
  * Author URI:        http://bengal-studio.com/
