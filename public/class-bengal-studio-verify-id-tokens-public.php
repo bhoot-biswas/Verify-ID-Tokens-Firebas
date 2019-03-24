@@ -224,7 +224,7 @@ class Bengal_Studio_Verify_Id_Tokens_Public {
 		}
 
 		/** Get the Secret Key */
-		$secret_key = defined( 'BENGAL_STUDIO_VERIFY_ID_TOKENS_SECRET_KEY' ) ? BENGAL_STUDIO_VERIFY_ID_TOKENS_SECRET_KEY : false;
+		$secret_key = defined( 'BENGAL_STUDIO_VERIFY_ID_TOKENS_FIREBASE_PROJECT_ID' ) ? BENGAL_STUDIO_VERIFY_ID_TOKENS_FIREBASE_PROJECT_ID : false;
 		if ( ! $secret_key ) {
 			return new WP_Error(
 				'verify_id_tokens_not_configurated',
