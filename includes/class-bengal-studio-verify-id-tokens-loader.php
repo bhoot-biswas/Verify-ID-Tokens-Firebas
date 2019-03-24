@@ -6,8 +6,8 @@
  * @link       http://bengal-studio.com/
  * @since      1.0.0
  *
- * @package    Verify_Id_Tokens
- * @subpackage Verify_Id_Tokens/includes
+ * @package    Bengal_Studio_Verify_Id_Tokens
+ * @subpackage Bengal_Studio_Verify_Id_Tokens/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Verify_Id_Tokens
- * @subpackage Verify_Id_Tokens/includes
+ * @package    Bengal_Studio_Verify_Id_Tokens
+ * @subpackage Bengal_Studio_Verify_Id_Tokens/includes
  * @author     Mithun Biswas <bhoot.biswas@gmail.com>
  */
-class Verify_Id_Tokens_Loader {
+class Bengal_Studio_Verify_Id_Tokens_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.
@@ -102,7 +102,7 @@ class Verify_Id_Tokens_Loader {
 			'component'     => $component,
 			'callback'      => $callback,
 			'priority'      => $priority,
-			'accepted_args' => $accepted_args
+			'accepted_args' => $accepted_args,
 		);
 
 		return $hooks;

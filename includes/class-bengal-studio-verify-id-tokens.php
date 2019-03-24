@@ -9,8 +9,8 @@
  * @link       http://bengal-studio.com/
  * @since      1.0.0
  *
- * @package    Verify_Id_Tokens
- * @subpackage Verify_Id_Tokens/includes
+ * @package    Bengal_Studio_Verify_Id_Tokens
+ * @subpackage Bengal_Studio_Verify_Id_Tokens/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Verify_Id_Tokens
- * @subpackage Verify_Id_Tokens/includes
+ * @package    Bengal_Studio_Verify_Id_Tokens
+ * @subpackage Bengal_Studio_Verify_Id_Tokens/includes
  * @author     Mithun Biswas <bhoot.biswas@gmail.com>
  */
-class Verify_Id_Tokens {
+class Bengal_Studio_Verify_Id_Tokens {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Verify_Id_Tokens {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Verify_Id_Tokens_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Bengal_Studio_Verify_Id_Tokens_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -69,8 +69,8 @@ class Verify_Id_Tokens {
 	public function __construct() {
 		$this->plugin_name = 'verify-id-tokens';
 		$this->version     = '1.0.0';
-		if ( defined( 'VERIFY_ID_TOKENS_VERSION' ) ) {
-			$this->version = VERIFY_ID_TOKENS_VERSION;
+		if ( defined( 'BENGAL_STUDIO_VERIFY_ID_TOKENS_VERSION' ) ) {
+			$this->version = BENGAL_STUDIO_VERIFY_ID_TOKENS_VERSION;
 		}
 
 		$this->load_dependencies();
@@ -84,10 +84,9 @@ class Verify_Id_Tokens {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Verify_Id_Tokens_Loader. Orchestrates the hooks of the plugin.
-	 * - Verify_Id_Tokens_i18n. Defines internationalization functionality.
-	 * - Verify_Id_Tokens_Admin. Defines all hooks for the admin area.
-	 * - Verify_Id_Tokens_Public. Defines all hooks for the public side of the site.
+	 * - Bengal_Studio_Verify_Id_Tokens_Loader. Orchestrates the hooks of the plugin.
+	 * - Bengal_Studio_Verify_Id_Tokens_I18n. Defines internationalization functionality.
+	 * - Bengal_Studio_Verify_Id_Tokens_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -100,34 +99,34 @@ class Verify_Id_Tokens {
 		/**
 		 * Load dependecies managed by composer.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/vendor/autoload.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'vendor/autoload.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-verify-id-tokens-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bengal-studio-verify-id-tokens-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-verify-id-tokens-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bengal-studio-verify-id-tokens-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-verify-id-tokens-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-bengal-studio-verify-id-tokens-public.php';
 
-		$this->loader = new Verify_Id_Tokens_Loader();
+		$this->loader = new Bengal_Studio_Verify_Id_Tokens_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Verify_Id_Tokens_i18n class in order to set the domain and to register the hook
+	 * Uses the Bengal_Studio_Verify_Id_Tokens_I18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -135,7 +134,7 @@ class Verify_Id_Tokens {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Verify_Id_Tokens_i18n();
+		$plugin_i18n = new Bengal_Studio_Verify_Id_Tokens_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -150,7 +149,11 @@ class Verify_Id_Tokens {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Verify_Id_Tokens_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Bengal_Studio_Verify_Id_Tokens_Public( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'rest_api_init', $plugin_public, 'add_api_routes' );
+		$this->loader->add_filter( 'rest_api_init', $plugin_public, 'add_cors' );
+		$this->loader->add_filter( 'rest_pre_dispatch', $plugin_public, 'rest_pre_dispatch', 10, 2 );
+		$this->loader->add_filter( 'determine_current_user', $plugin_public, 'determine_current_user', 10 );
 
 	}
 
@@ -178,7 +181,7 @@ class Verify_Id_Tokens {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Verify_Id_Tokens_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Bengal_Studio_Verify_Id_Tokens_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

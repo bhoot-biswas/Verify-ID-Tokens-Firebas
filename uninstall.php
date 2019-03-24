@@ -22,7 +22,7 @@
  * @link       http://bengal-studio.com/
  * @since      1.0.0
  *
- * @package    Verify_Id_Tokens
+ * @package    Bengal_Studio_Verify_Id_Tokens
  */
 
 // If uninstall not called from WordPress, then exit.

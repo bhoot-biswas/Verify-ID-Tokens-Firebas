@@ -10,10 +10,10 @@
  *
  * @link              http://bengal-studio.com/
  * @since             1.0.0
- * @package           Verify_Id_Tokens
+ * @package           Bengal_Studio_Verify_Id_Tokens
  *
  * @wordpress-plugin
- * Plugin Name:       Verify ID Tokens
+ * Plugin Name:       Verify ID Tokens | Firebase
  * Plugin URI:        http://wordpress.org/plugins/verify-id-tokens/
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
  * Version:           1.0.0
@@ -35,13 +35,13 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'VERIFY_ID_TOKENS_VERSION', '1.0.0' );
+define( 'BENGAL_STUDIO_VERIFY_ID_TOKENS_VERSION', '1.0.0' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-verify-id-tokens.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-bengal-studio-verify-id-tokens.php';
 
 /**
  * Begins execution of the plugin.
@@ -52,10 +52,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-verify-id-tokens.php';
  *
  * @since    1.0.0
  */
-function run_verify_id_tokens() {
+function bengal_studio_run_verify_id_tokens() {
 
-	$plugin = new Verify_Id_Tokens();
+	$plugin = new Bengal_Studio_Verify_Id_Tokens();
 	$plugin->run();
 
 }
-run_verify_id_tokens();
+bengal_studio_run_verify_id_tokens();
